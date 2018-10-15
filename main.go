@@ -25,7 +25,7 @@ func main() {
 		} else {
 			videoID := util.GetVideoID(*url, false)
 			if youtube.IsVideoExist(videoID) {
-				// TODO: Download here
+				util.Download(*url)
 			} else {
 				fmt.Println("Video doesn't exist.")
 			}
