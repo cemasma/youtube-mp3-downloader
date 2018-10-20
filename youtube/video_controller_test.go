@@ -28,6 +28,13 @@ func TestIsVideoExist(t *testing.T) {
 			},
 			want: false,
 		},
+		{
+			name: "TestIsVideoExist with ID in Playlist",
+			args: args{
+				url: "qXN15uh4DLU",
+			},
+			want: true,
+		},
 	}
 	for _, tt := range tests {
 		if got := IsVideoExist(tt.args.url); got != tt.want {

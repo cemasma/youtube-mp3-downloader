@@ -15,13 +15,9 @@ func main() {
 	flag.Parse()
 
 	if len(*url) > 0 {
-		if strings.Index(*url, "list") > -1 {
+		if strings.Index(*url, "list") > -1 && *playlist {
 			// TODO: Download by playlist
-			if *playlist {
 
-			} else {
-
-			}
 		} else {
 			videoID := util.GetVideoID(*url, false)
 			if youtube.IsVideoExist(videoID) {

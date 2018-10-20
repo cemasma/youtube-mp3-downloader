@@ -73,3 +73,29 @@ func TestAddNextPageToken(t *testing.T) {
 		})
 	}
 }
+
+func TestGetPlaylistID(t *testing.T) {
+	type args struct {
+		link string
+	}
+	tests := []struct {
+		name   string
+		args   args
+		wantID string
+	}{
+		{
+			name: "Playlist ID Test",
+			args: args{
+				link: "https://www.youtube.com/playlist?list=PLJmaGDjGiTOrgF3BFmmFX0K5eFt20dHe9",
+			},
+			wantID: "PLJmaGDjGiTOrgF3BFmmFX0K5eFt20dHe9",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotID := GetPlaylistID(tt.args.link); gotID != tt.wantID {
+				t.Errorf("GetPlaylistID() = %v, want %v", gotID, tt.wantID)
+			}
+		})
+	}
+}

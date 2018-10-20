@@ -1,13 +1,16 @@
 package util
 
-import "strings"
+import (
+	"net/url"
+	"strings"
+)
 
 // GetVideoID parse the text and returns video id
-func GetVideoID(url string, list bool) string {
+func GetVideoID(link string, list bool) string {
 	if list {
-		return strings.Split(strings.Split(url, "v=")[1], "&")[0]
+		return strings.Split(strings.Split(link, "v=")[1], "&")[0]
 	}
-	return strings.Split(url, "v=")[1]
+	return strings.Split(link, "v=")[1]
 }
 
 // AddNextPageToken is adds or changes the pageToken
@@ -16,6 +19,15 @@ func AddNextPageToken(queryURL, pageToken string) (newURL string) {
 		newURL = strings.Replace(queryURL, strings.Split(queryURL, "&pageToken=")[1], pageToken, 1)
 	} else {
 		newURL = queryURL + "&pageToken=" + pageToken
+	}
+	return
+}
+
+// GetPlaylistID parses url and returns list id
+func GetPlaylistID(link string) (id string) {
+	parsedURL, err := url.Parse(link)
+	if err == nil {
+		id = parsedURL.Query().Get("list")
 	}
 	return
 }
