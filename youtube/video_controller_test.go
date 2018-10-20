@@ -58,8 +58,8 @@ func TestGetIDListIfExist(t *testing.T) {
 				url: "PLJmaGDjGiTOrgF3BFmmFX0K5eFt20dHe9",
 			},
 			want: []Item{
-				{"UExKbWFHRGpHaVRPcmdGM0JGbW1GWDBLNWVGdDIwZEhlOS41NkI0NEY2RDEwNTU3Q0M2", "youtube#playlistItem"},
-				{"UExKbWFHRGpHaVRPcmdGM0JGbW1GWDBLNWVGdDIwZEhlOS4yODlGNEE0NkRGMEEzMEQy", "youtube#playlistItem"},
+				{"UExKbWFHRGpHaVRPcmdGM0JGbW1GWDBLNWVGdDIwZEhlOS41NkI0NEY2RDEwNTU3Q0M2", "youtube#playlistItem", ContentDetail{"qXN15uh4DLU"}},
+				{"UExKbWFHRGpHaVRPcmdGM0JGbW1GWDBLNWVGdDIwZEhlOS4yODlGNEE0NkRGMEEzMEQy", "youtube#playlistItem", ContentDetail{"WKmPlZHakQo"}},
 			},
 		},
 		{

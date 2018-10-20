@@ -7,10 +7,16 @@ import (
 	"youtube-mp3-downloader/util"
 )
 
+// ContentDetail contains video id for playlist videos
+type ContentDetail struct {
+	ID string `json:"videoId"`
+}
+
 // Item is data structure for store video details
 type Item struct {
-	ID   string `json:"id"`
-	Kind string `json:"kind"`
+	ID      string        `json:"id"`
+	Kind    string        `json:"kind"`
+	Content ContentDetail `json:"contentDetails"`
 }
 
 type videos struct {

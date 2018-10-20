@@ -16,8 +16,11 @@ func main() {
 
 	if len(*url) > 0 {
 		if strings.Index(*url, "list") > -1 && *playlist {
-			// TODO: Download by playlist
-
+			playlistID := util.GetPlaylistID(*url)
+			items := youtube.GetIDListIfExist(playlistID)
+			for _, item := range items {
+				util.Download("https://www.youtube.com/watch?v" + item.Content.ID)
+			}
 		} else {
 			videoID := util.GetVideoID(*url, false)
 			if youtube.IsVideoExist(videoID) {
