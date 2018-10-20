@@ -43,7 +43,7 @@ func TestIsVideoExist(t *testing.T) {
 	}
 }
 
-func TestGetURLListIfExist(t *testing.T) {
+func TestGetIDListIfExist(t *testing.T) {
 	type args struct {
 		url string
 	}
@@ -72,8 +72,8 @@ func TestGetURLListIfExist(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := GetURLListIfExist(tt.args.url); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("GetURLListIfExist() = %v, want %v", got, tt.want)
+			if got := GetIDListIfExist(tt.args.url); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("GetIDListIfExist() = %v, want %v", got, tt.want)
 			}
 		})
 	}

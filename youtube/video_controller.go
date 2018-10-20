@@ -22,8 +22,8 @@ type videos struct {
 const apiKey string = "AIzaSyAMP1Mnjpo0Vl8l_HhOw5nKP8RzQ67EhKE"
 
 // IsVideoExist checks video existence
-func IsVideoExist(url string) bool {
-	resp, err := http.Get("https://www.googleapis.com/youtube/v3/videos?part=id&id=" + url + "&key=" + apiKey)
+func IsVideoExist(id string) bool {
+	resp, err := http.Get("https://www.googleapis.com/youtube/v3/videos?part=id&id=" + id + "&key=" + apiKey)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -31,19 +31,19 @@ func IsVideoExist(url string) bool {
 
 	var video videos
 	json.NewDecoder(resp.Body).Decode(&video)
-	if len(video.Items) > 0 && video.Items[0].ID == url {
+	if len(video.Items) > 0 && video.Items[0].ID == id {
 		return true
 	}
 
 	return false
 }
 
-// GetURLListIfExist is checks the playlist and returns video urls
-func GetURLListIfExist(url string) []Item {
+// GetIDListIfExist is checks the playlist and returns video ids
+func GetIDListIfExist(id string) []Item {
 	items := []Item{}
 	isThereNextPageToken := true
 
-	queryURL := "https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&playlistId=" + url + "&key=" + apiKey
+	queryURL := "https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&playlistId=" + id + "&key=" + apiKey
 	for isThereNextPageToken == true {
 		resp, err := http.Get(queryURL)
 		if err != nil {
