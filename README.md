@@ -17,13 +17,13 @@ go get -u github.com/cemasma/youtube-mp3-downloader
 - If you want to download single video as in mp3 format.
 
 ```sh
-youtube-mp3-downloader --url videolinkhere
+youtube-mp3-downloader --url https://www.youtube.com/watch?v=t1dXdsUricU
  ```
 
 - If you want to download whole playlist as in mp3 format.
 
 ```sh
-youtube-mp3-downloader --url playlistlinkhere --playlist true
+youtube-mp3-downloader --url https://www.youtube.com/playlist?list=PLJmaGDjGiTOrgF3BFmmFX0K5eFt20dHe9 --playlist true
  ```
 
 | Flag     | Description              |
