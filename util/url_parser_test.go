@@ -1,6 +1,8 @@
 package util
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestGetVideoID(t *testing.T) {
 	type args struct {
@@ -33,5 +35,41 @@ func TestGetVideoID(t *testing.T) {
 		if got := GetVideoID(tt.args.url, tt.args.list); got != tt.want {
 			t.Errorf("%q. GetVideoID() = %v, want %v", tt.name, got, tt.want)
 		}
+	}
+}
+
+func TestAddNextPageToken(t *testing.T) {
+	type args struct {
+		queryURL  string
+		pageToken string
+	}
+	tests := []struct {
+		name       string
+		args       args
+		wantNewURL string
+	}{
+		{
+			name: "Test Without Page Token",
+			args: args{
+				queryURL:  "https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&playlistId=asd&key=qqq",
+				pageToken: "test",
+			},
+			wantNewURL: "https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&playlistId=asd&key=qqq&pageToken=test",
+		},
+		{
+			name: "Test With Token",
+			args: args{
+				queryURL:  "https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&playlistId=asd&key=qqq&pageToken=test",
+				pageToken: "testwithtoken",
+			},
+			wantNewURL: "https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&playlistId=asd&key=qqq&pageToken=testwithtoken",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotNewURL := AddNextPageToken(tt.args.queryURL, tt.args.pageToken); gotNewURL != tt.wantNewURL {
+				t.Errorf("AddNextPageToken() = %v, want %v", gotNewURL, tt.wantNewURL)
+			}
+		})
 	}
 }

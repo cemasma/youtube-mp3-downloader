@@ -4,16 +4,18 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"youtube-mp3-downloader/util"
 )
 
-type item struct {
+// Item is data structure for store video details
+type Item struct {
 	ID   string `json:"id"`
-	Etag string `json:"etag"`
 	Kind string `json:"kind"`
 }
 
 type videos struct {
-	Items []item `json:"items"`
+	Items         []Item `json:"items"`
+	NextPageToken string `json:"nextPageToken"`
 }
 
 // apiKey is Youtube api v3 public key
@@ -34,4 +36,35 @@ func IsVideoExist(url string) bool {
 	}
 
 	return false
+}
+
+// GetURLListIfExist is checks the playlist and returns video urls
+func GetURLListIfExist(url string) []Item {
+	items := []Item{}
+	isThereNextPageToken := true
+
+	queryURL := "https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&playlistId=" + url + "&key=" + apiKey
+	for isThereNextPageToken == true {
+		resp, err := http.Get(queryURL)
+		if err != nil {
+			log.Fatal(err)
+		}
+		defer resp.Body.Close()
+
+		var video videos
+		json.NewDecoder(resp.Body).Decode(&video)
+
+		if len(video.Items) == 0 {
+			return items
+		} else if video.NextPageToken != "" {
+			queryURL = util.AddNextPageToken(queryURL, video.NextPageToken)
+		} else {
+			isThereNextPageToken = false
+		}
+
+		items = append(items, video.Items...)
+
+	}
+
+	return items
 }
