@@ -19,7 +19,7 @@ func main() {
 			playlistID := util.GetPlaylistID(*url)
 			items := youtube.GetIDListIfExist(playlistID)
 			for _, item := range items {
-				util.Download("https://www.youtube.com/watch?v" + item.Content.ID)
+				util.Download("https://www.youtube.com/watch?v=" + item.Content.ID)
 			}
 		} else {
 			videoID := util.GetVideoID(*url, false)
