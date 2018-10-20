@@ -1,5 +1,5 @@
 # youtube-mp3-downloader
-This video will help you download youtube videos as mp3. Also you can download a list of video such as specific video.
+It provides you to download youtube videos as in mp3 format. Also you can download a list of video such as specific video.
 
 ## Installation
 - <a href="https://golang.org/dl/">Install Go</a>
